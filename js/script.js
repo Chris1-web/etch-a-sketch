@@ -6,6 +6,42 @@ const popUp = document.querySelector(".popup");
 const cancelPopupBtn = document.querySelector(".cancel-icon");
 const inputedGridNumber = document.querySelector(".form-input");
 const inputedGridNumberBtn = document.querySelector(".submit-btn");
+const generateNewColor = document.querySelector(".btn-generate-color");
+let color = "black"; //initial hover color is black
+
+/********************** QUICK FUNCTIONS ***************************/
+const clearCurrentColor = function () {
+  const coloredDivs = document.querySelectorAll(".grid");
+  coloredDivs.forEach(function (div) {
+    div.style.backgroundColor = "white";
+  });
+};
+
+// close popup window, called by cancel button click
+const removePopup = function () {
+  overLay.classList.remove("open-nav");
+  popUp.classList.add("hide");
+  popUp.classList.remove("open-nav");
+};
+
+// show popup window, called by cancel button click
+const showPopup = function () {
+  overLay.classList.add("open-nav");
+  popUp.classList.remove("hide");
+  popUp.classList.add("open-nav");
+};
+
+const clearAndGenerateNewDivs = function () {
+  clearCurrentColor();
+  showPopup();
+};
+
+const clearColorAndStartNewColor = function () {
+  clearCurrentColor();
+};
+/*****************************************************************/
+
+/********************** WALKTHORUGHS / LOGIC ***************************/
 
 //default 16 divs to be displayed on page load
 const defaultDiv = function (divNum = 16) {
@@ -31,42 +67,47 @@ const userGeneratedDivs = function (divNum) {
   getDiv.textContent = "";
   defaultDiv(divNum);
   removePopup();
+  clearCurrentColor();
+};
+
+const generateRGB = function () {
+  const generatedNumbers = [];
+  for (i = 0; i < 3; i++) {
+    const randomNumber = Math.floor(Math.random() * 256);
+    generatedNumbers.push(randomNumber);
+  }
+  return `rgb(${generatedNumbers.join(",")})`;
+};
+
+const generateColor = function (e) {
+  if (!e.target.classList.contains("grid")) return;
+  e.target.style.backgroundColor = color;
 };
 
 //leave color trail on hover element
-getDiv.addEventListener("mouseover", function (e) {
-  if (!e.target.classList.contains("grid")) return;
-  e.target.classList.add("color");
-});
-
-//clear divs and generate new ones
-clearDivs.addEventListener("click", function () {
-  inputedGridNumber.focus();
-  const coloredDivs = document.querySelectorAll(".color");
-  coloredDivs.forEach(function (div) {
-    div.classList.remove("color");
-  });
-  overLay.classList.add("open-nav");
-  popUp.classList.remove("hide");
-  popUp.classList.add("open-nav");
-});
-
-// close popup window, called by cancel button click
-const removePopup = function () {
-  overLay.classList.remove("open-nav");
-  popUp.classList.add("hide");
-  popUp.classList.remove("open-nav");
+const hoverColor = function () {
+  getDiv.addEventListener("mouseover", generateColor); //using bubbling
 };
 
-cancelPopupBtn.addEventListener("click", removePopup);
+hoverColor(); //call on page load
 
 //get user wanted grid number, called by submit button click
 const getUserInputedGrid = function (e) {
   e.preventDefault();
   const userDesiredNumber = inputedGridNumber.value;
   inputedGridNumber.value = "";
-  inputedGridNumber.focus();
+  color = "black";
   userGeneratedDivs(userDesiredNumber);
 };
+/*****************************************************************/
 
+/********************** EVENT LISTENERS ***************************/
 inputedGridNumberBtn.addEventListener("click", getUserInputedGrid);
+cancelPopupBtn.addEventListener("click", removePopup);
+//clear divs and generate new ones
+clearDivs.addEventListener("click", clearAndGenerateNewDivs);
+generateNewColor.addEventListener("click", function (e) {
+  color = generateRGB();
+  hoverColor();
+});
+/*****************************************************************/
