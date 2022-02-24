@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.body {
+  position: relative;
+}
+
+.container {
+  max-width: 900px;
+  margin: 10px auto;
+}
+
+.grid-container {
+  grid-template-columns: repeat(16, 1fr);
+}
+
+.grid-declaration {
+  display: grid;
+}
+
+.grid {
+  border: 1px solid black;
+  padding: 6px;
+  display: inline-block;
+  height: auto;
+}
+
+.grid.color {
+  background-color: rgb(0, 87, 255);
+}
+
+.form {
+  display: flex;
+  gap: 10px;
+}
+
+.thinking-emoji-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.form-input,
+.submit-btn {
+  padding: 8px;
+}
+
+.popup {
+  max-width: 500px;
+  padding: 20px;
+  border: 2px solid rgb(0, 87, 255);
+  background-color: rgba(158, 157, 157, 0.678);
+  display: flex;
+  gap: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(100%, -100%);
+  /* transition: all 0.8s ease-in-out; */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.973);
+  /* background-color: red; */
+  width: 100%;
+  transform: translateX(100%);
+  transition: all 0.8s ease-in-out;
+}
+
+.open-nav {
+  transform: translateX(0);
+  transition: all 0.8s ease-in-out;
+}
+
+.popup.open-nav {
+  transform: translate(-50%, -50%);
+}
+
+.hide {
+  visibility: hidden;
+  transition: all 0.75s ease-in-out;
+}
+
+.fa-remove {
+  color: rgba(199, 198, 198, 0.801);
+  font-size: 20px;
+}
+
+.remove-btn {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+}

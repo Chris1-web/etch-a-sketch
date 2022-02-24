@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./js/script.js" defer></script>
+    <title>Etch-A-Sketch</title>
+  </head>
+  <body class="body">
+    <div class="buttons container">
+      <button class="btn btn-clear">CLEAR</button>
+    </div>
+    <div class="container grid-declaration grid-container important"></div>
+    <div class="overlay"></div>
+    <div class="popup hide">
+      <div class="thinking-emoji-image">
+        <img src="./images/thinking.png" alt="thinking icon from FlatIcon" />
+      </div>
+      <div class="thinking-emoji-text">
+        <h3>
+          Select Number of Grids you want to be displayed in row and columns
+          square
+        </h3>
+        <form class="form">
+          <input
+            type="number"
+            placeholder="number of grid"
+            class="form-input"
+          />
+          <button class="submit-btn">Submit</button>
+        </form>
+      </div>
+      <div class="cancel-icon">
+        <button class="remove-btn"><i class="fa fa-remove"></i></button>
+      </div>
+    </div>
+  </body>
+</html>
